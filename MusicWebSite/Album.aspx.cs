@@ -13,13 +13,14 @@ namespace MusicWebSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //gest the ID of the album from the URL
             string id = Request.QueryString["ID"];
             listAPI l = new listAPI();
             l.getSonList();
             l.getAlbList();
             l.getAlbInfo(id);
 
-
+            //creates the list of song to be displayed by adding an html hyperlink to the webpage
             StringBuilder str = new StringBuilder();
             aName.InnerText = l.ab1.AlbumName;
             foreach (songClass item in l.sonList)

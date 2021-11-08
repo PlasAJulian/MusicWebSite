@@ -15,6 +15,7 @@ namespace MusicWebSite
         }
         protected void Btn_Click(Object sender, EventArgs e)
         {
+            //send the search word to be used in the next page
             string searchWord = SearchW.Value;
             Response.Redirect("Artist.aspx?Search=" + searchWord);
         }
