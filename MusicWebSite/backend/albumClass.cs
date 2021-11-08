@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+//basic structure of an album object from the API.
 namespace MusicWebSite.backend
 {
     [Serializable]
@@ -12,14 +10,5 @@ namespace MusicWebSite.backend
         public string AlbumGenres { get; set; }
         public string AlbumNumOfSongs { get; set; }
         public string ArtistID { get; set; }
-
-        public void displayAlbum()
-        {
-            Console.WriteLine("ID: " + AlbumID);
-            Console.WriteLine("Name: " + AlbumName);
-            Console.WriteLine("Genre: " + AlbumGenres);
-            Console.WriteLine("Number of songs: " + AlbumNumOfSongs);
-            Console.WriteLine("Artist ID : " + ArtistID);
-        }
     }
 }

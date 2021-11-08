@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿using System.Collections.Generic;
+//runs the search function of the website 
 namespace MusicWebSite.backend
 {
     class searchClass
@@ -12,12 +9,13 @@ namespace MusicWebSite.backend
         public artistClass s1 = new artistClass();
         public albumClass ab1 = new albumClass();
         listAPI l;
-
+        //cleans the searched word by making it all lower case and removing any additional spaces
         public string cleanWord(string s)
         {
             s = s.ToLower();
             return s.Trim();
         }
+        //checks if the searched word is an artist from the list or if an artist name contains the search word 
         public bool lookForArtist(string w)
         {
             l = new listAPI();
@@ -31,6 +29,7 @@ namespace MusicWebSite.backend
             }
             return false;
         }
+        //checks if the searched word is an album from the list or if an album name contains the search word
         public bool lookForAlbum(string w)
         {
             l = new listAPI();
@@ -44,6 +43,7 @@ namespace MusicWebSite.backend
             }
             return false;
         }
+        //checks if the searched word is a song from the list or if a song name contains the search word
         public bool LookForSong(string w)
         {
             l = new listAPI();
@@ -57,6 +57,7 @@ namespace MusicWebSite.backend
             }
             return false;
         }
+        //creates list to be displayed in the results pages if the searched word is a song
         public void searchSong(string sWord)
         {
             l = new listAPI();
@@ -67,16 +68,19 @@ namespace MusicWebSite.backend
             {
                 if (item.SongName.ToLower() == sWord || item.SongName.ToLower().Contains(sWord))
                 {
+                    //gets the infomation of the album the song came from and the artist of the song.
                     l.getArtInfo(item.ArtistID);
                     s1 = l.a1;
                     l.getAlbInfo(item.AlbumID);
                     ab1 = l.ab1;
                     foreach (albumClass i in l.albList)
                     {
+                        //gests the information of the album the song is from
                         if (i.AlbumID == item.AlbumID)
                         {
                             relatedAlbList.Add(i);
                         }
+                        //creates a list of other albums with the same genre 
                         else if (i.AlbumGenres == item.SongGenre)
                         {
                             recommendedAlbList.Add(i);
@@ -86,6 +90,7 @@ namespace MusicWebSite.backend
                 }
             }
         }
+        //creates list to be displayed in the results pages if the searched word is a album
         public void searchAlbum(string sWord)
         {
             l = new listAPI();
@@ -99,10 +104,12 @@ namespace MusicWebSite.backend
                     s1 = l.a1;
                     foreach (albumClass i in l.albList)
                     {
+                        //gests the information of the album itself 
                         if (i.AlbumName == item.AlbumName)
                         {
                             relatedAlbList.Add(i);
                         }
+                        //creates a list of other albums with the same genre
                         else if (i.AlbumGenres == item.AlbumGenres)
                         {
                             recommendedAlbList.Add(i);
@@ -112,6 +119,7 @@ namespace MusicWebSite.backend
                 }
             }
         }
+        //creates list to be displayed in the results pages if the searched word is a album
         public void searchArtist(string sWord)
         {
             l = new listAPI();
@@ -125,10 +133,12 @@ namespace MusicWebSite.backend
                     s1 = item;
                     foreach (albumClass i in l.albList)
                     {
+                        //gests the information of the albums made by the same artist 
                         if (i.ArtistID == s1.ID)
                         {
                             relatedAlbList.Add(i);
                         }
+                        //creates a list of other albums with the same genre
                         else if (i.AlbumGenres == s1.ArtistMainGenres)
                         {
                             recommendedAlbList.Add(i);
