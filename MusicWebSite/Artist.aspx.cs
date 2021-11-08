@@ -17,7 +17,7 @@ namespace MusicWebSite
             string seachWord = Request.QueryString["Search"];
             searchClass s = new searchClass();
             seachWord = s.cleanWord(seachWord);
-
+            listAPI l = new listAPI();
 
             StringBuilder str = new StringBuilder();
             //if the search word is an arist 
@@ -39,6 +39,10 @@ namespace MusicWebSite
                     str.Append(h1);
                     foreach (albumClass item in s.recommendedAlbList)
                     {
+                        l.getArtList();
+                        l.getArtInfo(item.ArtistID);
+                        string artname = "<h3>"+ l.a1.ArtistName +"</h3>";
+                        str.Append(artname);
                         string link = "<a href=/Album.aspx?ID=" + item.AlbumID + ">" + item.AlbumName + "</a>";
                         str.Append(link);
                     }
@@ -64,6 +68,10 @@ namespace MusicWebSite
                     str.Append(h1);
                     foreach (albumClass item in s.recommendedAlbList)
                     {
+                        l.getArtList();
+                        l.getArtInfo(item.ArtistID);
+                        string artname = "<h3>" + l.a1.ArtistName + "</h3>";
+                        str.Append(artname);
                         string link = "<a href=/Album.aspx?ID=" + item.AlbumID + ">" + item.AlbumName + "</a>";
                         str.Append(link);
                     }
@@ -89,6 +97,10 @@ namespace MusicWebSite
                     str.Append(h1);
                     foreach (albumClass item in s.recommendedAlbList)
                     {
+                        l.getArtList();
+                        l.getArtInfo(item.ArtistID);
+                        string artname = "<h3>" + l.a1.ArtistName + "</h3>";
+                        str.Append(artname);
                         string link = "<a href=/Album.aspx?ID=" + item.AlbumID + ">" + item.AlbumName + "</a>";
                         str.Append(link);
                     }
